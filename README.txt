@@ -1,0 +1,1 @@
+Everthing related to java that i find usefull
