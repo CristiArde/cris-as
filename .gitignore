@@ -1,0 +1,11 @@
+#IntelliJ & Eclipse
+.project
+.classpath
+*.eml
+*.iml
+*.idea
+*.ipr
+*.iws
+
+
+out/
