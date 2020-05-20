@@ -15,13 +15,13 @@ import java.awt.geom.RoundRectangle2D;
 public class Ring extends JLabel {
     private final int BORDER_THICKNESS = 5;
     private final int RING_RADIUS = 160;
- 
-    public Ring(Color color){
+    
+    public Ring(Color color) {
         super();
         this.setBackground(color);
         this.setOpaque(true);
-        this.setPreferredSize(new Dimension(300,100));
-        this.setBorder(new TextBubbleBorder(BORDER_THICKNESS,RING_RADIUS));
+        this.setPreferredSize(new Dimension(300, 100));
+        this.setBorder(new TextBubbleBorder(BORDER_THICKNESS, RING_RADIUS));
     }
 }
 
@@ -43,15 +43,12 @@ class TextBubbleBorder extends AbstractBorder {
         stroke = new BasicStroke(thickness);
         strokePad = thickness / 2;
         
-        hints = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         int pad = radius + strokePad;
         int bottomPad = pad + strokePad;
         insets = new Insets(pad, pad, bottomPad, pad);
     }
-    
     
     
     @Override
@@ -65,50 +62,32 @@ class TextBubbleBorder extends AbstractBorder {
     }
     
     @Override
-    public void paintBorder(
-            Component c,
-            Graphics g,
-            int x, int y,
-            int width, int height) {
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         
         Graphics2D g2 = (Graphics2D) g;
         
         int bottomLineY = height - thickness;
         
-        RoundRectangle2D.Double bubble = new RoundRectangle2D.Double(
-                0 + strokePad,
-                0 + strokePad,
-                width - thickness,
-                bottomLineY, radius, radius);
+        RoundRectangle2D.Double bubble = new RoundRectangle2D.Double(0 + strokePad, 0 + strokePad, width - thickness,
+                                                                     bottomLineY, radius, radius);
         
         Polygon pointer = new Polygon();
         
         if (left) {
             // left point
-            pointer.addPoint(
-                    strokePad + radius + pointerPad,
-                    bottomLineY);
+            pointer.addPoint(strokePad + radius + pointerPad, bottomLineY);
             // right point
-            pointer.addPoint(
-                    strokePad + radius + pointerPad,
-                    bottomLineY);
+            pointer.addPoint(strokePad + radius + pointerPad, bottomLineY);
             // bottom point
-            pointer.addPoint(
-                    strokePad + radius + pointerPad,
-                    height - strokePad);
-        } else {
+            pointer.addPoint(strokePad + radius + pointerPad, height - strokePad);
+        }
+        else {
             // left point
-            pointer.addPoint(
-                    width - (strokePad + radius + pointerPad),
-                    bottomLineY);
+            pointer.addPoint(width - (strokePad + radius + pointerPad), bottomLineY);
             // right point
-            pointer.addPoint(
-                    width - (strokePad + radius + pointerPad),
-                    bottomLineY);
+            pointer.addPoint(width - (strokePad + radius + pointerPad), bottomLineY);
             // bottom point
-            pointer.addPoint(
-                    width - (strokePad + radius + pointerPad),
-                    height - strokePad);
+            pointer.addPoint(width - (strokePad + radius + pointerPad), height - strokePad);
         }
         
         Area area = new Area(bubble);
@@ -118,10 +97,10 @@ class TextBubbleBorder extends AbstractBorder {
         
         // Paint the BG color of the parent, everywhere outside the clip
         // of the text bubble.
-        Component parent  = c.getParent();
-        if (parent!=null) {
+        Component parent = c.getParent();
+        if (parent != null) {
             Color bg = parent.getBackground();
-            Rectangle rect = new Rectangle(0,0,width, height);
+            Rectangle rect = new Rectangle(0, 0, width, height);
             Area borderRegion = new Area(rect);
             borderRegion.subtract(area);
             g2.setClip(borderRegion);
