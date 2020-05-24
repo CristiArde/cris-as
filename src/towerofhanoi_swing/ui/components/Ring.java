@@ -14,14 +14,14 @@ import java.awt.geom.RoundRectangle2D;
  ****************************************************************************/
 public class Ring extends JLabel {
     private final int BORDER_THICKNESS = 5;
-    private final int RING_RADIUS = 160;
+    private final int RING_RADIUS = 40;
     
-    public Ring(Color color) {
+    public Ring(Color color, int radius) {
         super();
         this.setBackground(color);
         this.setOpaque(true);
-        this.setPreferredSize(new Dimension(300, 100));
-        this.setBorder(new TextBubbleBorder(BORDER_THICKNESS, RING_RADIUS));
+//        this.setPreferredSize(new Dimension(width, height));
+        this.setBorder(new TextBubbleBorder(BORDER_THICKNESS, radius));
     }
 }
 
